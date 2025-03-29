@@ -1,5 +1,7 @@
 import unittest
+
 from src.vacancy import Vacancy
+
 
 def test_vacancy_initialization():
     vacancy = Vacancy("Python Developer", 100000, 150000, "https://hh.ru/vacancy/123456", "Moscow")
@@ -9,10 +11,12 @@ def test_vacancy_initialization():
     assert vacancy.url == "https://hh.ru/vacancy/123456"
     assert vacancy.city == "Moscow"
 
+
 def test_vacancy_comparison():
     vacancy1 = Vacancy("Python Developer", 100000, 150000, "https://hh.ru/vacancy/123456", "Moscow")
     vacancy2 = Vacancy("Java Developer", 120000, 180000, "https://hh.ru/vacancy/789012", "Moscow")
     assert vacancy1 < vacancy2
+
 
 def test_vacancy_repr():
     # Создаем экземпляр класса Vacancy
@@ -37,8 +41,18 @@ def test_get_vacancy_list():
 
     # Пример данных
     list_vacancy = [
-        {"name": "Вакансия 1", "alternate_url": "url1", "area": {"name": "Город1"}, "salary": {"from": 50000, "to": 60000}},
-        {"name": "Вакансия 2", "alternate_url": "url2", "area": {"name": "Город2"}, "salary": {"from": 70000, "to": 80000}},
+        {
+            "name": "Вакансия 1",
+            "alternate_url": "url1",
+            "area": {"name": "Город1"},
+            "salary": {"from": 50000, "to": 60000},
+        },
+        {
+            "name": "Вакансия 2",
+            "alternate_url": "url2",
+            "area": {"name": "Город2"},
+            "salary": {"from": 70000, "to": 80000},
+        },
         {"name": "Вакансия 3", "alternate_url": "url3", "area": {"name": "Город1"}, "salary": None},
     ]
 

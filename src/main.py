@@ -2,7 +2,8 @@ from src.get_api_hh import GetApiHh
 from src.json_saver import JsonSaver
 from src.vacancy import Vacancy
 
-def user_interaction():
+
+def user_interaction() -> None:
     """Функция для взаимодействия с пользователем"""
     response = GetApiHh()
     file_json = JsonSaver()
@@ -39,6 +40,7 @@ def user_interaction():
     print(f"Выводим {count} вакансий:")
     for vacancy in sorted_vacancies[:count]:
         print(vacancy)
+
 
 if __name__ == "__main__":
     user_interaction()

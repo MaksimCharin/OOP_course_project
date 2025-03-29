@@ -1,31 +1,34 @@
-import json
+from typing import Any
+
 import requests
+
 from src.abstract_api_hh import AbstractApiHh
+
 
 class GetApiHh(AbstractApiHh):
     """Класс для работы с API hh.ru"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self._all_vacancy = []
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self._all_vacancy}"
 
     @classmethod
-    def _connect_to_api(cls, params: dict) -> list:
+    def _connect_to_api(cls, params: dict) -> Any:
         """Подключение к API и получение данных"""
-        response = requests.get('https://api.hh.ru/vacancies', params=params)
+        response = requests.get("https://api.hh.ru/vacancies", params=params)
         if response.status_code == 200:
-            return response.json()['items']
+            return response.json()["items"]
         else:
             return []
 
     def get_vacancy_from_api(self, name_vacancy: str) -> list:
         """Получение информации о вакансиях для пользователя"""
-        params = {'text': name_vacancy, 'area': 113, 'per_page': 100}
+        params = {"text": name_vacancy, "area": 113, "per_page": 100}
         self._all_vacancy = self._connect_to_api(params)
         return self._all_vacancy
 
-    def get_all_vacancies(self) -> list:
+    def get_all_vacancies(self) -> Any:
         """Возвращает все вакансии"""
         return self._all_vacancy

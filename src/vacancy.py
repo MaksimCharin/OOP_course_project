@@ -1,8 +1,8 @@
 class Vacancy:
     """Класс для работы с вакансиями"""
 
-    __slots__ = ['name_vacancy', 'salary_from', 'salary_to', 'url', 'city']
-    list_vacancies = []
+    __slots__ = ["name_vacancy", "salary_from", "salary_to", "url", "city"]
+    list_vacancies: list = []
 
     def __init__(self, name_vacancy: str, salary_from: int, salary_to: int, url: str, city: str):
         self.name_vacancy = name_vacancy
@@ -12,14 +12,16 @@ class Vacancy:
         self.city = city
         self.list_vacancies.append(self)
 
-    def __repr__(self):
-        return (f"\nНазвание вакансии: {self.name_vacancy}\n"
-                f"Зарплата от: {self.salary_from}\n"
-                f"Зарплата до: {self.salary_to}\n"
-                f"Город: {self.city}\n"
-                f"URL: {self.url}\n")
+    def __repr__(self) -> str:
+        return (
+            f"\nНазвание вакансии: {self.name_vacancy}\n"
+            f"Зарплата от: {self.salary_from}\n"
+            f"Зарплата до: {self.salary_to}\n"
+            f"Город: {self.city}\n"
+            f"URL: {self.url}\n"
+        )
 
-    def __lt__(self, other):
+    def __lt__(self, other) -> bool:
         return self.salary_to < other.salary_to
 
     @classmethod

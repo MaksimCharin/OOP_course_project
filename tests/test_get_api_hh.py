@@ -1,4 +1,3 @@
-import unittest
 from unittest.mock import patch
 
 from src.get_api_hh import GetApiHh

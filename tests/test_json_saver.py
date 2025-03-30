@@ -70,9 +70,3 @@ def test_delete_vacancy():
     if os.path.exists(file_path):
         os.remove(file_path)
 
-
-if __name__ == "__main__":
-    test_save_and_read_file()
-    test_add_vacancy_to_file()
-    test_delete_vacancy()
-    print("All tests passed.")

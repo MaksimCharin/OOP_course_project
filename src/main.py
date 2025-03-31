@@ -1,46 +1,54 @@
-from src.get_api_hh import GetApiHh
-from src.json_saver import JsonSaver
+import time
+
+from src.api_hh import GetApiHh
+from src.utils import get_top_vacancies, filter_by_salary, filter_by_keyword, convert_to_dicts
 from src.vacancy import Vacancy
+from src.json_saver import JsonSaver
 
 
 def user_interaction() -> None:
-    """Функция для взаимодействия с пользователем"""
-    response = GetApiHh()
-    file_json = JsonSaver()
+    """Основная функция взаимодействия с пользователем"""
+    print("Программа для поиска вакансий с HeadHunter")
 
-    while True:
-        user_vacancy = input("Введите ключевые слова для фильтрации вакансий: \n")
-        user_city = input("Введите название города для запроса:\n")
-        if user_vacancy.isalpha() and user_city.isalpha():
-            break
-        print("Название должно содержать только буквы.")
+    # Инициализация компонентов
+    hh_api = GetApiHh()
+    saver = JsonSaver()
 
-    while True:
-        user_salary = input("Введите минимальную зарплату: \n")
-        if user_salary.isdigit():
-            break
-        print("Запрос должен содержать целое число.")
+    # Ввод параметров
+    search_query = input("Введите поисковый запрос (например 'Python'): ")
+    top_n = int(input("Введите количество вакансий для вывода: "))
+    min_salary = int(input("Введите минимальную зарплату: "))
 
-    response.get_vacancy_from_api(user_vacancy)
-    file_json.save_file(response.get_all_vacancies())
-    file_vacancies = file_json.read_file()
+    # Получение данных
+    print("\nПолучаем вакансии с hh.ru...")
+    api_data = hh_api.get_vacancy_from_api(search_query)
+    vacancies = [Vacancy.create_from_api(v) for v in api_data]
 
-    vacancy_list = Vacancy.get_vacancy_list(file_vacancies, user_city, int(user_salary))
-    sorted_vacancies = sorted(vacancy_list, reverse=True)  # Сортируем по убыванию зарплаты
+    # Фильтрация и сортировка через utils
+    filtered = filter_by_salary(vacancies, min_salary)
 
-    # Цикл для ввода количества вакансий для вывода
-    while True:
-        count = input("Введите количество вакансий для вывода: \n")
-        if count.isdigit():
-            count = int(count)
-            break
-        print("Запрос должен содержать целое число.")
+    keyword = input("\nВведите ключевое слово для фильтрации (или Enter): ")
+    filtered = filter_by_keyword(filtered, keyword)
 
-    # Выводим заданное количество вакансий
-    print(f"Выводим {count} вакансий:")
-    for vacancy in sorted_vacancies[:count]:
-        print(vacancy)
+    top_vacancies = get_top_vacancies(filtered, top_n)
+
+    # Сохранение результатов
+    saver.add_vacancies(convert_to_dicts(top_vacancies))
+
+    # Вывод результатов
+    time.sleep(1)
+    print(f"\nНайдено {len(top_vacancies)} вакансий:")
+    for i, vacancy in enumerate(top_vacancies, 1):
+        print(f"\n{i}. {vacancy}")
+
+    # Удаление вакансии
+    if top_vacancies:
+        print("\nХотите удалить вакансию?")
+        url_to_delete = input("Введите URL вакансии для удаления: ")
+        if url_to_delete:
+            saver.delete_vacancy(url_to_delete)
+            print("Вакансия удалена!")
 
 
 if __name__ == "__main__":
-    user_interaction()
+        user_interaction()

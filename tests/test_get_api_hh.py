@@ -1,10 +1,10 @@
 from unittest.mock import patch
-
-from src.get_api_hh import GetApiHh
+import requests
+from src.api_hh import ApiHH
 
 
 def test_get_vacancy_from_api():
-    with patch("src.get_api_hh.requests.get") as mock_get:
+    with patch("src.api_hh.requests.get") as mock_get:
         mock_get.return_value.status_code = 200
         mock_get.return_value.json.return_value = {
             "items": [
@@ -17,7 +17,7 @@ def test_get_vacancy_from_api():
             ]
         }
 
-        api = GetApiHh()
+        api = ApiHH()
         vacancies = api.get_vacancy_from_api("Test")
 
         assert len(vacancies) == 1
@@ -26,7 +26,7 @@ def test_get_vacancy_from_api():
 
 def test_repr():
     # Создаем экземпляр класса с известными данными
-    api = GetApiHh()
+    api = ApiHH()
     api._all_vacancy = [{"name": "Вакансия 1"}, {"name": "Вакансия 2"}]
 
     # Ожидаемая строка представления
@@ -38,7 +38,7 @@ def test_repr():
 
 def test_get_all_vacancies():
     # Создаем экземпляр класса с известными данными
-    api = GetApiHh()
+    api = ApiHH()
     api._all_vacancy = [{"name": "Вакансия 1"}, {"name": "Вакансия 2"}]
 
     # Проверка, что метод возвращает ожидаемый список вакансий
@@ -48,13 +48,34 @@ def test_get_all_vacancies():
 
 
 def test_connect_to_api_failure():
-    # Мокируем requests.get, чтобы он возвращал статус-код, отличный от 200
+    """Тест обработки ошибки подключения к API"""
     with patch("requests.get") as mock_get:
         mock_get.return_value.status_code = 404
         mock_get.return_value.json.return_value = {}
 
-        # Вызов метода _connect_to_api
-        result = GetApiHh._connect_to_api({})
+        # Создаем экземпляр класса
+        api = ApiHH()
 
-        # Проверка, что метод возвращает пустой список при ошибке подключения
-        assert result == [], "Метод _connect_to_api должен возвращать пустой список при ошибке подключения"
+        # Вызываем метод через экземпляр
+        result = api._connect_to_api({"text": "test"})
+
+        # Проверяем что возвращается пустой список при ошибке
+        assert result == []
+
+
+def test_connect_to_api_request_exception(capsys):
+    """Тест обработки ошибки RequestException с проверкой вывода сообщения"""
+    test_exception = requests.RequestException("Test connection error")
+
+    with patch('requests.get') as mock_get:
+        mock_get.side_effect = test_exception
+
+        api = ApiHH()
+        result = api._connect_to_api({"text": "test"})
+
+        # Проверяем что возвращается пустой список
+        assert result == []
+
+        # Проверяем вывод сообщения об ошибке
+        captured = capsys.readouterr()
+        assert "Ошибка при запросе к API: Test connection error" in captured.out

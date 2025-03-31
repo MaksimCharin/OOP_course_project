@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Python Developer",
+    "salary_from": 100000,
+    "salary_to": 150000,
+    "url": "https://hh.ru/vacancy/123",
+    "requirements": "Опыт работы с Python"
+  },
+  {
+    "name": "Python разработчик (Django)",
+    "salary_from": 0,
+    "salary_to": 330000,
+    "url": "https://hh.ru/vacancy/118967420",
+    "requirements": "Опыт работы с Django. Понимание принципов чистого кода и тестирования (pytest, unittest). Владение Docker, опыт работы с CI/CD. "
+  },
+  {
+    "name": "Специалист по IT",
+    "salary_from": 300000,
+    "salary_to": 2500000,
+    "url": "https://hh.ru/vacancy/118279002",
+    "requirements": "Требования не указаны"
+  },
+  {
+    "name": "Python developer",
+    "salary_from": 345000,
+    "salary_to": 480000,
+    "url": "https://hh.ru/vacancy/118811735",
+    "requirements": "Требования не указаны"
+  },
+  {
+    "name": "Frontend Developer/React",
+    "salary_from": 0,
+    "salary_to": 350000,
+    "url": "https://hh.ru/vacancy/118807677",
+    "requirements": "Требования не указаны"
+  },
+  {
+    "name": "Frontend-разработчик (midle+)",
+    "salary_from": 200000,
+    "salary_to": 300000,
+    "url": "https://hh.ru/vacancy/118954618",
+    "requirements": "Требования не указаны"
+  },
+  {
+    "name": "Junior Python Developer",
+    "salary_from": 130000,
+    "salary_to": 300000,
+    "url": "https://hh.ru/vacancy/118941947",
+    "requirements": "Требования не указаны"
+  },
+  {
+    "name": "Python разработчик",
+    "salary_from": 160000,
+    "salary_to": 210000,
+    "url": "https://hh.ru/vacancy/118737542",
+    "requirements": "Требования не указаны"
+  },
+  {
+    "name": "Python-разработчик",
+    "salary_from": 100000,
+    "salary_to": 200000,
+    "url": "https://hh.ru/vacancy/118783415",
+    "requirements": "Требования не указаны"
+  },
+  {
+    "name": "Frontend-разработчик (Vue.js)",
+    "salary_from": 110000,
+    "salary_to": 140000,
+    "url": "https://hh.ru/vacancy/118512957",
+    "requirements": "Требования не указаны"
+  }
+]

@@ -9,7 +9,6 @@ class Vacancy:
         self.url = url
         self.requirements = self._validate_requirements(requirements)
 
-
     @staticmethod
     def _validate_salary(value: int) -> int:
         """Валидация зарплаты"""

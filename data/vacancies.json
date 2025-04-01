@@ -75,5 +75,33 @@
     "salary_to": 250000,
     "url": "https://hh.ru/vacancy/118668088",
     "requirements": "Требования не указаны"
+  },
+  {
+    "name": "QA Middle / Middle + инженер",
+    "salary_from": 180000,
+    "salary_to": 250000,
+    "url": "https://hh.ru/vacancy/118603555",
+    "requirements": "Требования не указаны"
+  },
+  {
+    "name": "Разработчик Python",
+    "salary_from": 0,
+    "salary_to": 180000,
+    "url": "https://hh.ru/vacancy/118915281",
+    "requirements": "Требования не указаны"
+  },
+  {
+    "name": "Frontend-разработчик (ReactJS)",
+    "salary_from": 190000,
+    "salary_to": 230000,
+    "url": "https://hh.ru/vacancy/119008131",
+    "requirements": "Требования не указаны"
+  },
+  {
+    "name": "Frontend-разработчик (JS, React, Next) Middle",
+    "salary_from": 0,
+    "salary_to": 170000,
+    "url": "https://hh.ru/vacancy/119004999",
+    "requirements": "Требования не указаны"
   }
 ]

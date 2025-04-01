@@ -1,6 +1,6 @@
 import time
 
-from src.api_hh import GetApiHh
+from src.api_hh import ApiHH
 from src.utils import get_top_vacancies, filter_by_salary, filter_by_keyword, convert_to_dicts
 from src.vacancy import Vacancy
 from src.json_saver import JsonSaver
@@ -11,7 +11,7 @@ def user_interaction() -> None:
     print("Программа для поиска вакансий с HeadHunter")
 
     # Инициализация компонентов
-    hh_api = GetApiHh()
+    hh_api = ApiHH()
     saver = JsonSaver()
 
     # Ввод параметров

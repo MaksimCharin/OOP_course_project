@@ -3,26 +3,17 @@ class Vacancy:
     __slots__ = ("name", "salary_from", "salary_to", "url", "requirements")
 
     def __init__(self, name: str, salary_from: int, salary_to: int, url: str, requirements: str = None):
-        self.name = self._validate_name(name)
+        self.name = name
         self.salary_from = self._validate_salary(salary_from)
         self.salary_to = self._validate_salary(salary_to)
-        self.url = self._validate_url(url)
+        self.url = url
         self.requirements = self._validate_requirements(requirements)
 
-    @staticmethod
-    def _validate_name(value: str) -> str:
-        """Валидация названия вакансии"""
-        return value if value else "Без названия"
 
     @staticmethod
     def _validate_salary(value: int) -> int:
         """Валидация зарплаты"""
         return value if isinstance(value, int) and value >= 0 else 0
-
-    @staticmethod
-    def _validate_url(value: str) -> str:
-        """Валидация URL"""
-        return value if value else ""
 
     @staticmethod
     def _validate_requirements(value: str) -> str:

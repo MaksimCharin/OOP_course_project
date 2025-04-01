@@ -68,5 +68,12 @@
     "salary_to": 140000,
     "url": "https://hh.ru/vacancy/118512957",
     "requirements": "Требования не указаны"
+  },
+  {
+    "name": "Разработчик (Python)",
+    "salary_from": 0,
+    "salary_to": 250000,
+    "url": "https://hh.ru/vacancy/118668088",
+    "requirements": "Требования не указаны"
   }
 ]

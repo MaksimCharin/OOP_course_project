@@ -13,6 +13,7 @@ class AbstractJsonSaver(ABC):
     def read_file(self) -> None:
         """Метод для чтения данных из файла"""
         pass
+
     @abstractmethod
     def add_vacancy(self) -> None:
         """Добавление одной вакансии в файл с проверкой на дубликаты"""

@@ -1,9 +1,9 @@
 import time
 
 from src.api_hh import ApiHH
-from src.utils import get_top_vacancies, filter_by_salary, filter_by_keyword, convert_to_dicts
-from src.vacancy import Vacancy
 from src.json_saver import JsonSaver
+from src.utils import convert_to_dicts, filter_by_keyword, filter_by_salary, get_top_vacancies
+from src.vacancy import Vacancy
 
 
 def user_interaction() -> None:
@@ -51,4 +51,4 @@ def user_interaction() -> None:
 
 
 if __name__ == "__main__":
-        user_interaction()
+    user_interaction()

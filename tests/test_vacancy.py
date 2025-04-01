@@ -1,5 +1,7 @@
 import pytest
+
 from src.vacancy import Vacancy
+
 
 def test_vacancy_initialization():
     """Тест инициализации с обязательными параметрами"""
@@ -11,11 +13,14 @@ def test_vacancy_initialization():
     assert vacancy.requirements == "Требования не указаны"
 
 
-@pytest.mark.parametrize("req_input,expected", [
-    (None, "Требования не указаны"),
-    ("", "Требования не указаны"),
-    ("Some reqs", "Some reqs"),
-])
+@pytest.mark.parametrize(
+    "req_input,expected",
+    [
+        (None, "Требования не указаны"),
+        ("", "Требования не указаны"),
+        ("Some reqs", "Some reqs"),
+    ],
+)
 def test_requirements_validation(req_input, expected):
     """Параметризованный тест валидации требований"""
     vacancy = Vacancy("Dev", 0, 0, "url", req_input)
@@ -61,7 +66,7 @@ def test_create_from_api_valid():
         "name": "API Job",
         "salary": {"from": 100, "to": 200},
         "alternate_url": "api_url",
-        "snippet": {"requirements": "API skills"}
+        "snippet": {"requirements": "API skills"},
     }
     vacancy = Vacancy.create_from_api(api_data)
     assert vacancy.name == "API Job"
@@ -73,12 +78,7 @@ def test_create_from_api_valid():
 
 def test_create_from_api_missing_fields():
     """Тест создания из неполных API данных"""
-    api_data = {
-        "name": "Job",
-        "alternate_url": "url",
-        "salary": None,
-        "snippet": None
-    }
+    api_data = {"name": "Job", "alternate_url": "url", "salary": None, "snippet": None}
     vacancy = Vacancy.create_from_api(api_data)
     assert vacancy.salary_from == 0
     assert vacancy.salary_to == 0
@@ -92,7 +92,7 @@ def test_to_dict_conversion(sample_vacancy):
         "salary_from": 100000,
         "salary_to": 150000,
         "url": "https://hh.ru/vacancy/123",
-        "requirements": "Опыт работы с Python 3+"
+        "requirements": "Опыт работы с Python 3+",
     }
     assert sample_vacancy.to_dict() == expected
 

@@ -1,6 +1,6 @@
 import json
 import os
-from typing import List, Dict
+from typing import Dict, List
 
 from config import DATA
 from src.abstract_json_saver import AbstractJsonSaver
@@ -13,7 +13,7 @@ class JsonSaver(AbstractJsonSaver):
         self._file_path = file_path
 
         if not os.path.exists(self._file_path):
-            with open(self._file_path, 'w', encoding='utf-8') as file:
+            with open(self._file_path, "w", encoding="utf-8") as file:
                 json.dump([], file)
 
     def save_file(self, data: List[Dict]) -> None:
@@ -31,19 +31,20 @@ class JsonSaver(AbstractJsonSaver):
         vacancies = self.read_file()
 
         # Проверка на дубликаты по URL (как уникальному идентификатору)
-        if not any(v['url'] == vacancy['url'] for v in vacancies):
+        if not any(v["url"] == vacancy["url"] for v in vacancies):
             vacancies.append(vacancy)
             self.save_file(vacancies)
 
     def add_vacancies(self, vacancies: List[Dict]) -> None:
         """Добавляет вакансии, исключая дубликаты"""
         existing = self.read_file()
-        existing_urls = {v['url'] for v in existing}
+        existing_urls = {v["url"] for v in existing}
 
         new_vacancies = [
-            v for v in vacancies
-            if v['url'] not in existing_urls
-               and all(k in v for k in ['name', 'salary_from', 'salary_to', 'url', 'requirements'])
+            v
+            for v in vacancies
+            if v["url"] not in existing_urls
+            and all(k in v for k in ["name", "salary_from", "salary_to", "url", "requirements"])
         ]
 
         self.save_file(existing + new_vacancies)
@@ -51,5 +52,5 @@ class JsonSaver(AbstractJsonSaver):
     def delete_vacancy(self, vacancy_url: str) -> None:
         """Удаление вакансии по URL"""
         vacancies = self.read_file()
-        updated_vacancies = [v for v in vacancies if v['url'] != vacancy_url]
+        updated_vacancies = [v for v in vacancies if v["url"] != vacancy_url]
         self.save_file(updated_vacancies)

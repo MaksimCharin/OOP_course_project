@@ -1,5 +1,6 @@
 class Vacancy:
     """Класс для представления вакансии"""
+
     __slots__ = ("name", "salary_from", "salary_to", "url", "requirements")
 
     def __init__(self, name: str, salary_from: int, salary_to: int, url: str, requirements: str = None):
@@ -20,7 +21,7 @@ class Vacancy:
         return value if value else "Требования не указаны"
 
     @classmethod
-    def create_from_api(cls, api_data: dict) -> 'Vacancy':
+    def create_from_api(cls, api_data: dict) -> "Vacancy":
         """Создает экземпляр Vacancy из данных API с полной обработкой"""
         try:
             # Безопасное извлечение данных
@@ -32,7 +33,7 @@ class Vacancy:
                 salary_from=salary.get("from"),
                 salary_to=salary.get("to"),
                 url=api_data.get("alternate_url"),
-                requirements=snippet.get("requirements")
+                requirements=snippet.get("requirements"),
             )
         except Exception:
             return cls(
@@ -40,7 +41,7 @@ class Vacancy:
                 salary_from=0,
                 salary_to=0,
                 url="",
-                requirements="Данные неполные или повреждены"
+                requirements="Данные неполные или повреждены",
             )
 
     def __lt__(self, other) -> bool:
@@ -57,10 +58,12 @@ class Vacancy:
 
     def __str__(self) -> str:
         """Строковое представление вакансии"""
-        return (f"{self.name}\n"
-                f"Зарплата: {self.salary_from}-{self.salary_to}\n"
-                f"Требования: {self.requirements}\n"
-                f"Ссылка: {self.url}")
+        return (
+            f"{self.name}\n"
+            f"Зарплата: {self.salary_from}-{self.salary_to}\n"
+            f"Требования: {self.requirements}\n"
+            f"Ссылка: {self.url}"
+        )
 
     def to_dict(self) -> dict:
         """Преобразует вакансию в словарь для сохранения"""
@@ -69,7 +72,7 @@ class Vacancy:
             "salary_from": self.salary_from,
             "salary_to": self.salary_to,
             "url": self.url,
-            "requirements": self.requirements
+            "requirements": self.requirements,
         }
 
     def __repr__(self) -> str:

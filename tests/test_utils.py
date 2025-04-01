@@ -1,5 +1,5 @@
+from src.utils import convert_to_dicts, filter_by_keyword, filter_by_salary, get_top_vacancies
 from src.vacancy import Vacancy
-from src.utils import filter_by_salary, filter_by_keyword, get_top_vacancies, convert_to_dicts
 
 
 def test_filter_by_salary(sample_vacancies):

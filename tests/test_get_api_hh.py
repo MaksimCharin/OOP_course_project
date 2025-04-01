@@ -1,5 +1,7 @@
 from unittest.mock import patch
+
 import requests
+
 from src.api_hh import ApiHH
 
 
@@ -67,7 +69,7 @@ def test_connect_to_api_request_exception(capsys):
     """Тест обработки ошибки RequestException с проверкой вывода сообщения"""
     test_exception = requests.RequestException("Test connection error")
 
-    with patch('requests.get') as mock_get:
+    with patch("requests.get") as mock_get:
         mock_get.side_effect = test_exception
 
         api = ApiHH()
